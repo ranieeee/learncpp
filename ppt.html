@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>📚 C++ 课程资源中心 · PPT与源码站</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #eef2ff 0%, #f9f3e6 100%);
+            font-family: 'Inter', sans-serif;
+            padding: 2rem 1.5rem;
+            color: #1e293b;
+        }
+
+        /* 主容器 */
+        .resource-hub {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* 头部 */
+        .hero-resource {
+            background: linear-gradient(120deg, #1e2a3a, #0f172a);
+            border-radius: 2rem;
+            padding: 2rem 2rem;
+            margin-bottom: 2rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.2);
+        }
+
+        .hero-resource::after {
+            content: "📁 💻 📘";
+            font-size: 5rem;
+            position: absolute;
+            bottom: -20px;
+            right: 20px;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .hero-resource h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-resource p {
+            margin-top: 0.6rem;
+            opacity: 0.85;
+            max-width: 70%;
+        }
+
+        .breadcrumb {
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        /* 全局布局：左右结构 (左侧章节列表，右侧详情/预览区域) */
+        .two-columns {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        /* 左侧章节导航卡片 */
+        .chapters-sidebar {
+            flex: 1.2;
+            min-width: 280px;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(2px);
+            border-radius: 1.8rem;
+            padding: 1.5rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255,255,255,0.6);
+            height: fit-content;
+        }
+
+        .section-title-sm {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-left: 4px solid #f59e0b;
+            padding-left: 0.8rem;
+        }
+
+        .chapter-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+
+        .chapter-item {
+            background: white;
+            border-radius: 1.2rem;
+            padding: 0.9rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+        }
+
+        .chapter-item:hover {
+            transform: translateX(5px);
+            background: #fefce8;
+            border-color: #facc15;
+        }
+
+        .chapter-item.active {
+            background: #fef9c3;
+            border-left: 5px solid #f59e0b;
+            box-shadow: 0 6px 12px -6px rgba(0,0,0,0.1);
+        }
+
+        .chapter-num {
+            font-weight: 800;
+            font-size: 1.3rem;
+            width: 36px;
+            color: #f59e0b;
+        }
+
+        .chapter-title {
+            font-weight: 600;
+            font-size: 1rem;
+            flex: 1;
+        }
+
+        .chapter-badge {
+            font-size: 0.7rem;
+            background: #e2e8f0;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            color: #334155;
+        }
+
+        /* 右侧主内容区 */
+        .content-main {
+            flex: 2.5;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(2px);
+            border-radius: 1.8rem;
+            padding: 1.8rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255,255,255,0.6);
+        }
+
+        /* 当前章节展示区域 */
+        .current-chapter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            border-bottom: 2px dashed #e2e8f0;
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .current-chapter-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #2b3b4e, #1f2a3a);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        /* 资源卡片网格: 仅保留 PPT + 源码 (视频/文件已全部删除) */
+        .resource-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin: 1.8rem 0;
+        }
+
+        .resource-card {
+            background: #f8fafc;
+            border-radius: 1.2rem;
+            padding: 1.5rem;
+            transition: all 0.2s;
+            border: 1px solid #eef2ff;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            background: #ffffff;
+            border-color: #facc15;
+            box-shadow: 0 12px 20px -12px rgba(0,0,0,0.15);
+        }
+
+        .card-icon {
+            font-size: 2.8rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .resource-card h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+
+        .resource-card p {
+            font-size: 0.85rem;
+            color: #5b6e8c;
+        }
+
+        .mock-link {
+            color: #f59e0b;
+            font-weight: 500;
+            font-size: 0.8rem;
+            margin-top: 0.8rem;
+            display: inline-block;
+            background: #fff2e0;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+        }
+
+        .footer-note {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #5c6f87;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            padding-top: 1.5rem;
+        }
+
+        @media (max-width: 780px) {
+            .hero-resource p {
+                max-width: 100%;
+            }
+        }
+        button {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .toast-msg {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e293b;
+            color: #ffec99;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            z-index: 999;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            pointer-events: none;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+
+<div class="resource-hub">
+    <!-- 头部区域 -->
+    <div class="hero-resource">
+        <div class="breadcrumb">
+            <i class="fa-regular fa-folder-open"></i> 课程资源中心 / PPT & 源码库
+        </div>
+        <h1>
+            <i class="fas fa-laptop-code"></i> 
+            C++ 程序设计 · 课件与源码驿站
+        </h1>
+        <p>📖 涵盖全8章教学PPT（飞书文件）及配套源码，点击卡片直接跳转飞书文档。</p>
+    </div>
+
+    <div class="two-columns">
+        <!-- 左侧：章节列表 -->
+        <div class="chapters-sidebar">
+            <div class="section-title-sm">
+                <i class="fas fa-book-open"></i>  📑 章节导航
+            </div>
+            <div class="chapter-list" id="chapterList">
+                <!-- js 动态渲染章节列表 -->
+            </div>
+            <div style="margin-top: 1.5rem; font-size: 0.7rem; color: #6c86a3; text-align: center;">
+                <i class="fa-regular fa-circle-check"></i> 每章配有飞书PPT + 示例源码
+            </div>
+        </div>
+
+        <!-- 右侧：详细内容区域 -->
+        <div class="content-main">
+            <div class="current-chapter-header">
+                <span class="current-chapter-title" id="currentChapterName">第1章：初识C++</span>
+                <span style="font-size: 0.75rem; background:#eef2ff; padding: 0.2rem 0.7rem; border-radius: 30px;"><i class="fa-regular fa-clock"></i> 持续更新</span>
+            </div>
+
+            <!-- 资源卡片网格: 仅 PPT + 源码 (教学视频模块、文件仓库模块已完全删除) -->
+            <div class="resource-cards-grid">
+                <!-- PPT 卡片 (点击跳转飞书链接) -->
+                <div class="resource-card" id="pptCard">
+                    <div class="card-icon">📊</div>
+                    <h4>PPT 课件</h4>
+                    <p>本章节完整幻灯片 · 飞书文档</p>
+                    <span class="mock-link"><i class="fa-regular fa-eye"></i> 立即查看</span>
+                </div>
+                <!-- 源码卡片 (保留模块，点击后模拟提示，预留源码下载入口) -->
+                <div class="resource-card" id="sourceCard">
+                    <div class="card-icon">💻</div>
+                    <h4>配套源码</h4>
+                    <p>示例代码 + 项目片段 (逐步开放)</p>
+                    <span class="mock-link"><i class="fa-regular fa-file-code"></i> 获取源码</span>
+                </div>
+            </div>
+
+            <div class="footer-note">
+                <i class="fa-regular fa-floppy-disk"></i> 所有PPT资源均存放在飞书云文档，点击PPT卡片即可跳转阅读。源码模块正在建设中，敬请期待。
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 章节数据 (完全依照课程)
+    const chapters = [
+        { id: 1, name: "初识C++" },
+        { id: 2, name: "类与对象" },
+        { id: 3, name: "继承和多态" },
+        { id: 4, name: "运算符重载" },
+        { id: 5, name: "模板" },
+        { id: 6, name: "流" },
+        { id: 7, name: "异常与断言" },
+        { id: 8, name: "初识STL" }
+    ];
+
+    // 飞书PPT链接映射 (根据题目提供的8个链接)
+    const pptUrls = {
+        1: "https://bjfu-lidar.feishu.cn/file/Re8LbBVbzoRdMkx3rAIcXRQMnC6",
+        2: "https://bjfu-lidar.feishu.cn/file/UqlZbA94voA2XSx8v33cy2NAnqd",
+        3: "https://bjfu-lidar.feishu.cn/file/VvZhbP3cKoZghXxRN0qcYlqpnh2",
+        4: "https://bjfu-lidar.feishu.cn/file/K9BWbmV4aoNtCGxfETec8aTHnch",
+        5: "https://bjfu-lidar.feishu.cn/file/T3s8bkPQ4o3H2qxnIQ3cOZQPn2d",
+        6: "https://bjfu-lidar.feishu.cn/file/Wo2KbSaYlo7r9MxVjlFcpadLnjc",
+        7: "https://bjfu-lidar.feishu.cn/file/MnTabz8z1odHk8xAkC1cE8YMnsc",
+        8: "https://bjfu-lidar.feishu.cn/file/Bf3vb7K3foUF8sxSPpbccZwWnDg"
+    };
+
+    let currentChapterId = 1;
+
+    // 渲染左侧列表
+    function renderChapterList() {
+        const container = document.getElementById('chapterList');
+        if (!container) return;
+        container.innerHTML = '';
+        chapters.forEach(ch => {
+            const item = document.createElement('div');
+            item.className = `chapter-item ${currentChapterId === ch.id ? 'active' : ''}`;
+            item.setAttribute('data-id', ch.id);
+            item.innerHTML = `
+                <div class="chapter-num">${ch.id}</div>
+                <div class="chapter-title">${ch.name}</div>
+                <div class="chapter-badge"><i class="fa-regular fa-file-powerpoint"></i> PPT</div>
+            `;
+            item.addEventListener('click', (e) => {
+                e.stopPropagation();
+                setActiveChapter(ch.id);
+            });
+            container.appendChild(item);
+        });
+    }
+
+    // 切换章节
+    function setActiveChapter(id) {
+        currentChapterId = id;
+        renderChapterList(); // 重新渲染高亮
+        updateMainContent();
+        showFloatingToast(`已切换至：${chapters.find(c => c.id === id)?.name} 资源区`);
+    }
+
+    // 更新右侧主内容区的章节标题
+    function updateMainContent() {
+        const chapter = chapters.find(c => c.id === currentChapterId);
+        if (chapter) {
+            const titleEl = document.getElementById('currentChapterName');
+            if (titleEl) titleEl.innerText = `第${currentChapterId}章：${chapter.name}`;
+        }
+        // 重新绑定PPT卡片链接 (确保每次切换后链接是最新章节)
+        bindPPTLink();
+        // 源码卡片不变，但依然保留模块功能
+        bindSourceCard();
+    }
+
+    // 绑定PPT卡片：根据当前章节跳转飞书链接
+    function bindPPTLink() {
+        const pptCard = document.getElementById('pptCard');
+        if (pptCard) {
+            // 移除原有的事件监听 (简单替换克隆方式)
+            const newPptCard = pptCard.cloneNode(true);
+            pptCard.parentNode.replaceChild(newPptCard, pptCard);
+            newPptCard.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const url = pptUrls[currentChapterId];
+                if (url) {
+                    window.open(url, '_blank');
+                    showFloatingToast(`📖 打开第${currentChapterId}章课件 (飞书文档)`, 1500);
+                } else {
+                    showFloatingToast(`⚠️ 暂未找到第${currentChapterId}章的PPT链接`, 1500);
+                }
+            });
+            // 重新获取id以防后续
+            document.getElementById('pptCard') || (newPptCard.id = 'pptCard');
+        }
+    }
+
+    // 绑定源码卡片 (保留占位交互)
+    function bindSourceCard() {
+        const sourceCard = document.getElementById('sourceCard');
+        if (sourceCard) {
+            const newSourceCard = sourceCard.cloneNode(true);
+            sourceCard.parentNode.replaceChild(newSourceCard, sourceCard);
+            newSourceCard.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const chapter = chapters.find(c => c.id === currentChapterId);
+                showFloatingToast(`💻 第${currentChapterId}章《${chapter?.name}》源码正在整理中，后续提供下载`, 2000);
+            });
+            newSourceCard.id = 'sourceCard';
+        }
+    }
+
+    // 显示小提示
+    function showFloatingToast(msg, duration = 2000) {
+        let toast = document.querySelector('.toast-msg');
+        if (toast) toast.remove();
+        const div = document.createElement('div');
+        div.className = 'toast-msg';
+        div.innerHTML = `<i class="fa-regular fa-message"></i> ${msg}`;
+        document.body.appendChild(div);
+        setTimeout(() => {
+            div.style.opacity = '0';
+            setTimeout(() => div.remove(), 400);
+        }, duration);
+    }
+
+    // 初始化页面，并且确保没有教学视频/文件仓库区域
+    function init() {
+        renderChapterList();
+        updateMainContent();     // 内部调用 bindPPTLink / bindSourceCard
+        // 确保完全没有任何额外模块的残留 (DOM中已无教学视频或文件模块)
+        // 添加额外的保障: 如果存在任何 .extra-modules 则删除，但代码中没有相应结构
+    }
+
+    init();
+</script>
+</body>
+</html>

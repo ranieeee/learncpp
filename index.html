@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>📘 C++ 程序设计 · 飞书风格趣味课程站</title>
+    <title>📘 C++ 程序设计 · 趣味课程站</title>
     <!-- 引入 Google Fonts 增强趣味感 -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <!-- Font Awesome 6 (免费图标库) -->
@@ -20,6 +20,8 @@
             font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
             padding: 2rem 1.5rem;
             color: #1e2a3e;
+            position: relative;
+            min-height: 100vh;
         }
 
         /* 飞书风格容器：柔和圆角，干净背景 */
@@ -32,6 +34,8 @@
             box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0,0,0,0.05);
             overflow: hidden;
             transition: all 0.2s ease;
+            position: relative;
+            z-index: 5;
         }
 
         /* 趣味头部: 动感图标 + 渐变条 */
@@ -108,6 +112,37 @@
             margin-top: 0.5rem;
         }
 
+        /* 课程简介区域 - 增加可点击样式 */
+        .course-intro {
+            margin: 1.5rem 2rem 0.5rem 2rem;
+            background: rgba(255,255,240,0.7);
+            border-radius: 1.2rem;
+            padding: 1rem 1.5rem;
+            border: 1px solid rgba(250,204,21,0.3);
+            backdrop-filter: blur(2px);
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .course-intro:hover {
+            background: rgba(255,245,200,0.9);
+            transform: translateX(5px);
+            border-color: #f59e0b;
+        }
+        .intro-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #b45309;
+        }
+        .intro-content {
+            color: #334155;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
         /* 信息卡片网格 */
         .info-grid {
             display: grid;
@@ -167,10 +202,19 @@
             background: #f8fafc;
             padding: 0.7rem;
             border-radius: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .teacher-info.professor-clickable {
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+        }
+        .teacher-info.professor-clickable:hover {
+            background: #eef2ff;
+            transform: translateX(4px);
         }
 
         .avatar {
-            background: #cbd5e1;
             width: 40px;
             height: 40px;
             border-radius: 40px;
@@ -178,14 +222,15 @@
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             background: #3b82f6;
             color: white;
         }
 
-        /* 资料库区域 趣味链接卡片 */
+        /* 资料库区域 - 卡片更大，内边距增加 */
         .resources-section {
-            padding: 0.5rem 2rem 2rem 2rem;
+            padding: 1.5rem 2rem 2rem 2rem;
+            margin-top: 0.5rem;
         }
 
         .section-title {
@@ -205,34 +250,36 @@
 
         .resources-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.2rem;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
         }
 
+        /* 资源卡片样式 - 尺寸更大 */
         .resource-link {
             background: white;
-            border-radius: 1.2rem;
+            border-radius: 1.5rem;
             transition: all 0.2s;
             display: flex;
             align-items: center;
-            gap: 1rem;
-            padding: 1rem 1.2rem;
+            gap: 1.2rem;
+            padding: 1.3rem 1.5rem;
             text-decoration: none;
             color: #1e293b;
             border: 1px solid #e9edf2;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            min-height: 100px;
         }
 
         .resource-link:hover {
             background: #fefce8;
             border-color: #facc15;
-            transform: scale(1.01);
-            box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+            transform: scale(1.02);
+            box-shadow: 0 12px 20px -12px rgba(0,0,0,0.1);
         }
 
         .resource-icon {
-            font-size: 1.9rem;
-            width: 48px;
+            font-size: 2.4rem;
+            width: 56px;
             text-align: center;
         }
 
@@ -242,23 +289,25 @@
 
         .resource-title {
             font-weight: 700;
-            font-size: 1.05rem;
+            font-size: 1.15rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            margin-bottom: 0.25rem;
         }
 
         .resource-desc {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: #5b6e8c;
             margin-top: 0.2rem;
+            line-height: 1.3;
         }
 
         .badge-new {
             background: #f97316;
             color: white;
             font-size: 0.65rem;
-            padding: 0.2rem 0.5rem;
+            padding: 0.2rem 0.6rem;
             border-radius: 40px;
             font-weight: 600;
         }
@@ -266,8 +315,8 @@
         .footer-note {
             border-top: 1px solid rgba(0,0,0,0.05);
             margin-top: 1.5rem;
-            padding: 1.5rem 2rem 2rem;
-            text-align: center;
+            padding: 1.2rem 2rem 1.8rem;
+            text-align: left;
             font-size: 0.8rem;
             color: #5c6f87;
             display: flex;
@@ -296,13 +345,80 @@
             }
         }
 
-        button.ripple-btn {
-            background: none;
-            border: none;
+        /* 趣味按钮触发飘浮 - 做大一点 */
+        .fun-trigger {
+            background: rgba(255,215,0,0.25);
+            border-radius: 3rem;
+            padding: 0.6rem 1.4rem;
+            font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,215,0,0.4);
+        }
+        .fun-trigger:hover {
+            background: rgba(255,215,0,0.4);
+            transform: scale(1.02);
+        }
+        .fun-trigger:active {
+            transform: scale(0.98);
         }
 
-        /* 响应式 */
+        /* 趣味航行图列表样式 */
+        .custom-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .custom-list li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* 新增可互动小按钮样式 */
+        .interact-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .mini-btn {
+            background: #f1f5f9;
+            border: none;
+            border-radius: 40px;
+            padding: 6px 14px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #2c6e9e;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .mini-btn:hover {
+            background: #facc15;
+            color: #1e293b;
+            transform: scale(1.02);
+        }
+        .surprise-box {
+            background: #fef9e6;
+            border-radius: 1rem;
+            padding: 10px 14px;
+            margin-top: 12px;
+            font-size: 0.8rem;
+            color: #b45309;
+            display: none;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* 响应式调整 */
         @media (max-width: 700px) {
             body {
                 padding: 1rem;
@@ -316,23 +432,17 @@
             .hero-section {
                 padding: 1.8rem;
             }
-            .info-grid, .resources-section {
+            .info-grid, .resources-section, .course-intro {
                 padding-left: 1.2rem;
                 padding-right: 1.2rem;
             }
-        }
-
-        /* 趣味按钮触发飘浮 */
-        .fun-trigger {
-            background: rgba(255,215,0,0.2);
-            border-radius: 2rem;
-            padding: 0.2rem 0.8rem;
-            font-size: 0.7rem;
-            cursor: pointer;
-            transition: 0.1s;
-        }
-        .fun-trigger:active {
-            transform: scale(0.96);
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+            .fun-trigger {
+                padding: 0.4rem 1rem;
+                font-size: 0.85rem;
+            }
         }
     </style>
 </head>
@@ -342,8 +452,8 @@
     <!-- 趣味头部区域 -->
     <div class="hero-section">
         <div class="course-badge">
-            <i class="fas fa-chalkboard-user"></i> <span>2025 春季 · 计算机学院</span>
-            <i class="fas fa-code"></i> <span>3 学分</span>
+            <i class="fas fa-chalkboard-user"></i> <span>2026 春季 · 信息学院（人工智能学院）</span>
+            <i class="fas fa-code"></i> <span>2 学分</span>
         </div>
         <h1>
             <i class="fas fa-laptop-code"></i> 
@@ -353,9 +463,19 @@
         <div class="subhead">
             📌 从零构建现代C++思维 | 面向对象 | 泛型编程 | 乐趣与工程并重
         </div>
-        <div style="margin-top: 1.2rem; display: flex; gap: 0.8rem; flex-wrap: wrap;">
-            <span class="fun-trigger" id="triggerEmoji"><i class="fa-regular fa-face-smile"></i> 戳我撒花 ✨</span>
-            <span style="font-size: 0.8rem; opacity: 0.7;"><i class="fa-regular fa-clock"></i> 每周二/四 10:00-12:00 | 逸夫楼 C501</span>
+        <div style="margin-top: 1.2rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+            <span class="fun-trigger" id="triggerEmoji"><i class="fa-regular fa-face-smile fa-lg"></i> 戳我撒花 ✨🎉</span>
+            <span style="font-size: 0.85rem; opacity: 0.8;"><i class="fa-regular fa-clock"></i> 每周二/四 13:30-15:05 | 学研A座 N01/N07</span>
+        </div>
+    </div>
+
+    <!-- 课程简介区域 - 增加点击互动 -->
+    <div class="course-intro" id="courseIntroClick">
+        <div class="intro-title">
+            <i class="fa-regular fa-file-lines"></i> 📖 课程简介 <i class="fa-regular fa-hand-pointer" style="font-size: 0.8rem; opacity: 0.7;"></i>
+        </div>
+        <div class="intro-content">
+            待更新
         </div>
     </div>
 
@@ -365,41 +485,52 @@
         <div class="card">
             <div class="card-icon"><i class="fas fa-chalkboard-user"></i></div>
             <h3><i class="fas fa-star-of-life" style="font-size: 0.9rem; color:#f59e0b;"></i> 讲师 & 助教天团</h3>
-            <div class="teacher-info">
-                <div class="avatar">👩‍🏫</div>
-                <div><strong>林语轩 教授</strong><br> C++ 标准化委员会成员 | 编程语言实验室</div>
+            <div class="teacher-info professor-clickable" id="professorLink">
+                <div class="avatar">👨‍🏫</div>
+                <div><strong>卢昊 副教授</strong><br> 数字媒体教研室 | 编程语言</div>
             </div>
             <div class="teacher-info">
-                <div class="avatar">🧑‍💻</div>
-                <div><strong>助教：陈子轩 / 李思敏</strong><br> 答疑时间: 周三 14:00-16:00 (线上+线下)</div>
+                <div class="avatar">👩‍💻</div>
+                <div><strong>助教：田雨歆 </strong><br> 答疑时间: 周三 14:00-16:00 (线上+线下)</div>
             </div>
-            <p style="margin-top: 12px;"><i class="fa-regular fa-message"></i> 课程专属飞书群：<strong>📢 C++ 探险队</strong> ｜ 代码 review 每周打卡</p>
+            <!-- 新增互动小按钮组 -->
+            <div class="interact-buttons">
+                <button class="mini-btn" id="greetBtn"><i class="fa-regular fa-hand-peace"></i> 向老师问好</button>
+                <button class="mini-btn" id="randomTipBtn"><i class="fa-regular fa-lightbulb"></i> 随机C++ tip</button>
+            </div>
+            <div id="surpriseMessage" class="surprise-box"></div>
         </div>
         
         <!-- 课程大纲 & 趣味亮点 -->
         <div class="card">
             <div class="card-icon"><i class="fas fa-map"></i></div>
             <h3><i class="fa-regular fa-compass"></i> 趣味航行图</h3>
-            <ul style="padding-left: 1.2rem; margin-top: 8px; color: #334155;">
-                <li>📖 第1章：C++ 语法飞船起航</li>
-                <li>⚙️ 第2章：内存奇遇 & RAII 魔法</li>
-                <li>🧩 第3章：类与对象 · 设计一个“动物园”</li>
-                <li>🔁 第4章：运算符重载 — 让代码说话</li>
-                <li>🧬 第5章：继承与多态 · 模拟游戏角色</li>
-                <li>✨ 第6章：STL 百宝箱 & 现代C++17/20 亮点</li>
+            <ul class="custom-list" style="padding-left: 0.2rem; margin-top: 8px; color: #334155;">
+                <li>📘 第1章：初识C++</li>
+                <li>🏗️ 第2章：类与对象</li>
+                <li>🧬 第3章：继承和多态</li>
+                <li>🔧 第4章：运算符重载</li>
+                <li>📦 第5章：模板</li>
+                <li>🌊 第6章：流</li>
+                <li>🚨 第7章：异常与断言</li>
+                <li>🧩 第8章：初始STL</li>
             </ul>
-            <p style="margin-top: 12px; background: #eef2ff; border-radius: 12px; padding: 6px 10px;"><i class="fas fa-gamepad"></i> 期末大作业：开发“C++ 控制台小游戏/简易编译器前端”</p>
+            <!-- 互动按钮：随机章节挑战 -->
+            <div class="interact-buttons">
+                <button class="mini-btn" id="randomChapterBtn"><i class="fa-solid fa-shuffle"></i> 随机抽章节</button>
+            </div>
+            <div id="chapterResult" class="surprise-box"></div>
         </div>
 
-        <!-- 评分/考试信息 -->
+        <!-- 评分/考试信息 - 更换了新图标 -->
         <div class="card">
-            <div class="card-icon"><i class="fas fa-chart-simple"></i></div>
+            <div class="card-icon"><i class="fas fa-trophy"></i></div>
             <h3><i class="fa-regular fa-calendar-check"></i> 得分秘籍</h3>
-            <div class="detail-item"><strong>📝 平时实验 + 随堂测</strong> : 30%</div>
-            <div class="detail-item"><strong>🏆 小组项目 (GitHub协作)</strong> : 30%</div>
-            <div class="detail-item"><strong>📚 期末机考 (有趣实战)</strong> : 40%</div>
-            <div class="detail-item" style="margin-top: 12px;"><i class="fa-regular fa-clock"></i> 期中闯关：第8周 · 在线编程挑战</div>
-            <div class="detail-item"><i class="fa-regular fa-calendar"></i> 期末周：2025.06.10 - 06.18</div>
+            <div class="detail-item"><i class="fa-regular fa-pen-to-square"></i> <strong>📝 平时成绩</strong> : 35%</div>
+            <div class="detail-item"><i class="fa-regular fa-keyboard"></i> <strong>🏆 期中机考</strong> : 15%</div>
+            <div class="detail-item"><i class="fa-regular fa-computer"></i> <strong>📚 期末机考</strong> : 50%</div>
+            <div class="detail-item" style="margin-top: 12px;"><i class="fa-regular fa-clock"></i> 期中测验：第8周 · 在线编程挑战</div>
+            <div class="detail-item"><i class="fa-regular fa-calendar"></i> 期末周：2026.06.10 - 06.18</div>
         </div>
     </div>
 
@@ -410,9 +541,7 @@
             📂 资料驿站 · 教学资源库
             <span style="font-size: 0.8rem; background: #e0f2fe; border-radius: 30px; padding: 0.2rem 0.7rem;">持续更新 🚀</span>
         </div>
-        <div class="resources-grid" id="resourcesGrid">
-            <!-- 动态加载的趣味资料链接，同时包含静态部分，但是使用js生成也可以，这里直接写 + 增加动态趣味替换 -->
-        </div>
+        <div class="resources-grid" id="resourcesGrid"></div>
     </div>
     
     <!-- 课程公告牌 额外飞书卡片风格 -->
@@ -425,100 +554,68 @@
     </div>
 
     <div class="footer-note">
-        <span><i class="fa-brands fa-feixun"></i> 飞书云文档同步 · 实时更新</span>
         <span><i class="fa-regular fa-heart"></i> 用代码改变世界 | 有任何疑问 @助教</span>
-        <span><i class="fa-regular fa-copy"></i> 课程仓库: github.com/cpp-adventure/feishu-hub</span>
+        <span></span>
     </div>
 </div>
 
 <script>
-    // ---------- 超级有趣资料库 (模拟飞书分享链接) ----------
+    // ---------- 资料库 ----------
+    // 第三个模块改为“签到”，点击跳转至指定飞书链接
     const resourcesList = [
-        {
-            icon: "📘",
-            title: "《C++ Primer 第5版》核心笔记",
-            desc: "飞书文档 · 含重点标注 & 代码片段",
-            url: "https://www.feishu.cn/docx/CPP_Primer_Notes_Adventure",
-            isNew: false,
-            tag: "推荐阅读"
-        },
-        {
-            icon: "🎮",
-            title: "趣味项目：坦克大战 C++ 实现",
-            desc: "控制台游戏源码 + 实验指导书",
-            url: "https://www.feishu.cn/docx/TankBattle_Cplusplus_Lab",
-            isNew: true,
-            tag: "新发布"
-        },
-        {
-            icon: "📊",
-            title: "课件PPT · 类与多态 魔法学院版",
-            desc: "内嵌动画与代码挑战",
-            url: "https://www.feishu.cn/docx/Polymorphism_Magic",
-            isNew: false,
-            tag: "热门"
-        },
-        {
-            icon: "🧪",
-            title: "在线OJ 刷题集 | C++ 闯关 50 关",
-            desc: "含自动评测 & 积分排行榜",
-            url: "https://www.feishu.cn/docx/CPP_OJ_Adventure",
-            isNew: false,
-            tag: "实战"
-        },
-        {
-            icon: "🗂️",
-            title: "每周实验模板 + 参考解答",
-            desc: "更新至实验三：继承与多态",
-            url: "https://www.feishu.cn/docx/Weekly_Lab_CPP",
-            isNew: true,
-            tag: "实验必备"
-        },
-        {
-            icon: "🧰",
-            title: "C++ 现代化特性速查表 (C++11/17/20)",
-            desc: "飞书多维表格 · 一表看懂",
-            url: "https://www.feishu.cn/base/ModernCPPCheatSheet",
-            isNew: false,
-            tag: "工具"
-        }
+        { icon: "📑", title: "课件PPT & 源码仓库", desc: "每章课件PDF + 示例代码，持续同步", url: "ppt.html", isNew: true, tag: "核心资料" },
+        { icon: "🌳", title: "北林OJ 在线刷题平台", desc: "C++程序设计专项练习 + 竞赛真题", url: "https://www.bjfuacm.com/contests", isNew: true, tag: "实战OJ" },
+        { icon: "✅", title: "签到打卡", desc: "每日学习签到，记录成长轨迹", url: "https://bjfu-lidar.feishu.cn/base/SbCObujGQaJsWQsnmd9cOiyPnvb?table=tblASsd52fSZlKJT&view=vewoiUIlNk", isNew: true, tag: "每日签到" },
+        { icon: "🔮", title: "敬请期待", desc: "更多精彩内容准备中", url: "#", isNew: false, tag: "即将上线" },
+        { icon: "✨", title: "敬请期待", desc: "敬请期待后续更新", url: "#", isNew: false, tag: "即将上线" },
+        { icon: "🌟", title: "敬请期待", desc: "保持好奇心，很快见面", url: "#", isNew: false, tag: "即将上线" }
     ];
 
-    // 渲染资源网格
     function renderResources() {
         const gridContainer = document.getElementById('resourcesGrid');
         if (!gridContainer) return;
         gridContainer.innerHTML = '';
-        resourcesList.forEach(res => {
+        resourcesList.forEach((res, index) => {
             const linkDiv = document.createElement('a');
             linkDiv.className = 'resource-link';
-            linkDiv.href = res.url;
-            linkDiv.target = '_blank';
-            linkDiv.rel = 'noopener noreferrer';
             
-            // 趣味图标与new徽章
-            const iconSpan = document.createElement('div');
-            iconSpan.className = 'resource-icon';
+            // 处理敬请期待模块（不跳转，弹出提示）
+            if (res.title === "敬请期待" || res.url === "#") {
+                linkDiv.href = "javascript:void(0);";
+                linkDiv.style.cursor = "default";
+                linkDiv.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    createFloatingEmoji('🔮', e.clientX, e.clientY);
+                    alert("✨ 敬请期待，更多精彩内容正在准备中 ✨");
+                });
+            } 
+            // 签到模块和课件PPT模块正常跳转
+            else {
+                linkDiv.href = res.url;
+                linkDiv.target = '_blank';
+                linkDiv.rel = 'noopener noreferrer';
+            }
+            
+            const iconSpan = document.createElement('div'); 
+            iconSpan.className = 'resource-icon'; 
             iconSpan.innerHTML = res.icon;
             
-            const infoDiv = document.createElement('div');
+            const infoDiv = document.createElement('div'); 
             infoDiv.className = 'resource-info';
-            const titleSpan = document.createElement('div');
+            const titleSpan = document.createElement('div'); 
             titleSpan.className = 'resource-title';
             titleSpan.innerHTML = `${res.title} ${res.isNew ? '<span class="badge-new">🔥 NEW</span>' : ''}`;
-            const descSpan = document.createElement('div');
+            const descSpan = document.createElement('div'); 
             descSpan.className = 'resource-desc';
             descSpan.innerHTML = `${res.desc}  <i class="fa-regular fa-folder-open"></i> ${res.tag}`;
-            infoDiv.appendChild(titleSpan);
+            infoDiv.appendChild(titleSpan); 
             infoDiv.appendChild(descSpan);
-            
-            linkDiv.appendChild(iconSpan);
+            linkDiv.appendChild(iconSpan); 
             linkDiv.appendChild(infoDiv);
             gridContainer.appendChild(linkDiv);
         });
     }
-    
-    // 趣味飘浮特效函数 (增加互动)
+
     function createFloatingEmoji(emoji, x, y) {
         const el = document.createElement('div');
         el.className = 'floating-emoji';
@@ -526,139 +623,81 @@
         el.style.left = x + 'px';
         el.style.top = y + 'px';
         document.body.appendChild(el);
-        setTimeout(() => {
-            el.remove();
-        }, 2800);
+        setTimeout(() => el.remove(), 2800);
     }
-    
-    // 随机趣味消息数组
-    const funMessages = [
-        "✨ 今日C++冷知识：vector<bool> 是个特例！",
-        "🤖 推荐阅读：Effective Modern C++ 条款10～",
-        "💡 上机小窍门：善用 constexpr 提升性能 🚀",
-        "🎉 恭喜 陈同学 在OJ挑战中完成Hard题目！",
-        "📢 下周二将邀请 Bjarne Stroustrup 虚拟座谈 (录播)🎙️",
-        "🧩 指针 vs 引用: 记住指针可空，引用更安全~",
-        "🐞 Debug 趣味挑战: 找出代码中的未定义行为赢积分"
-    ];
-    
-    let currentNoticeIndex = 0;
+
+    // 随机趣闻
+    const funMessages = ["✨ 今日C++冷知识：vector<bool> 是个特例！", "🤖 推荐阅读：Effective Modern C++ 条款10～", "💡 善用 constexpr 提升性能 🚀", "🎉 恭喜同学在OJ挑战中完成Hard题目！", "📢 Bjarne Stroustrup 虚拟座谈🎙️", "🧩 指针 vs 引用: 记住指针可空", "🐞 Debug挑战: 找出未定义行为"];
     const noticeSpan = document.getElementById('liveNotice');
-    function updateRandomNotice() {
-        let newIdx = Math.floor(Math.random() * funMessages.length);
-        if (noticeSpan) {
-            noticeSpan.innerHTML = `📢 ${funMessages[newIdx]}`;
-        }
-    }
+    function updateRandomNotice() { if(noticeSpan) noticeSpan.innerHTML = `📢 ${funMessages[Math.floor(Math.random() * funMessages.length)]}`; }
+    document.getElementById('refreshNoticeBtn')?.addEventListener('click', () => { updateRandomNotice(); const rect = document.getElementById('refreshNoticeBtn').getBoundingClientRect(); createFloatingEmoji('🎉', rect.left+20, rect.top-10); createFloatingEmoji('📘', rect.right-30, rect.top-5); });
     
-    // 更换趣闻按钮
-    const refreshBtn = document.getElementById('refreshNoticeBtn');
-    if (refreshBtn) {
-        refreshBtn.addEventListener('click', () => {
-            updateRandomNotice();
-            // 顺便放个烟花特效
-            const rect = refreshBtn.getBoundingClientRect();
-            createFloatingEmoji('🎉', rect.left + 20, rect.top - 10);
-            createFloatingEmoji('📘', rect.right - 30, rect.top - 5);
-        });
-    }
-    
-    // 全局点击飘浮 (触发撒花按钮)
+    // 戳我撒花按钮 - 增大尺寸后，撒花效果更丰富
     const triggerBtn = document.getElementById('triggerEmoji');
     if (triggerBtn) {
         triggerBtn.addEventListener('click', (e) => {
             const x = e.clientX || window.innerWidth / 2;
             const y = e.clientY || window.innerHeight / 2;
-            const emojis = ['💻', '🐧', '🎯', '⚡', '🧩', '📚', '🚀', '💡', '🎮'];
-            for (let i = 0; i < 8; i++) {
+            const emojis = ['💻', '🐧', '🎯', '⚡', '🧩', '📚', '🚀', '🌸', '✨', '🎉', '💡', '🎮'];
+            for (let i = 0; i < 12; i++) {
                 setTimeout(() => {
-                    const randX = x + (Math.random() - 0.5) * 80;
-                    const randY = y + (Math.random() - 0.5) * 40 - 20;
+                    const randX = x + (Math.random() - 0.5) * 120;
+                    const randY = y + (Math.random() - 0.5) * 60 - 20;
                     createFloatingEmoji(emojis[Math.floor(Math.random() * emojis.length)], randX, randY);
-                }, i * 40);
+                }, i * 35);
             }
-            // 同时随机改变notice一下增加趣味
             updateRandomNotice();
+            // 额外加个小惊喜
+            setTimeout(() => {
+                createFloatingEmoji('🎊', x - 20, y - 30);
+                createFloatingEmoji('🎈', x + 30, y - 25);
+            }, 200);
         });
     }
     
-    // 添加卡片点击额外小特效: 点击任何卡片或资源链接也产生小表情 (可选增强体验)
-    document.querySelectorAll('.card, .resource-link').forEach(el => {
-        el.addEventListener('click', (e) => {
-            // 避免太频繁冒泡
-            if (e.target.closest('.resource-link') || e.target.closest('.card')) {
-                const rect = el.getBoundingClientRect();
-                const x = rect.left + rect.width / 2;
-                const y = rect.top + 10;
-                createFloatingEmoji('✨', x, y);
+    // 课程简介点击互动
+    const courseIntroDiv = document.getElementById('courseIntroClick');
+    if (courseIntroDiv) {
+        courseIntroDiv.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const rect = courseIntroDiv.getBoundingClientRect();
+            // 飘浮多个小图标
+            for (let i = 0; i < 6; i++) {
+                setTimeout(() => {
+                    const randX = rect.left + 20 + Math.random() * (rect.width - 40);
+                    const randY = rect.top + 20 + Math.random() * (rect.height - 40);
+                    const icons = ['📖', '✨', '💡', '🎓', '📚', '✏️'];
+                    createFloatingEmoji(icons[Math.floor(Math.random() * icons.length)], randX, randY);
+                }, i * 80);
+            }
+            // 临时改变文字趣味反馈
+            const originalText = courseIntroDiv.querySelector('.intro-content')?.innerHTML;
+            const tempDiv = courseIntroDiv.querySelector('.intro-content');
+            if (tempDiv && originalText === "待更新") {
+                tempDiv.innerHTML = "🤗 哇！你发现隐藏彩蛋啦～ 课程简介正在精心准备中，敬请期待精彩内容！ ✨";
+                setTimeout(() => {
+                    tempDiv.innerHTML = "待更新";
+                }, 2500);
+            } else if (tempDiv) {
+                tempDiv.innerHTML = "🎉 课程内容持续升级中，感谢你的关注！ 🚀";
+                setTimeout(() => {
+                    tempDiv.innerHTML = originalText;
+                }, 2000);
             }
         });
-    });
+    }
     
-    // 资料链接额外检测: 在飞书文档打开时增加模拟趣味提示（由于链接真实不可跳转，但模拟飞书链接点击效果）
-    // 为了更像飞书云文档体验，在控制台友好提醒: 展示弹框友好的toast? 不需要复杂，只需要让用户觉得有趣，鼠标悬停增加效果。
-    // 增加 hover 动态 title 提示
-    const style = document.createElement('style');
-    style.textContent = `
-        .resource-link:hover .resource-icon {
-            transform: scale(1.1);
-            transition: 0.1s;
-        }
-        .card {
-            transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-        }
-    `;
-    document.head.appendChild(style);
-    
-    // 模拟飞书文档场景: 增加背景可爱的“云文档”浮水印感觉
-    // 并且页面初始化时，播放简单问候
-    window.addEventListener('load', () => {
-        renderResources();
-        // 随机初始化第一个通知
-        updateRandomNotice();
-        // 增加 动态日期展示小彩蛋: 显示距离期末考试周的天数（趣味）
-        const footer = document.querySelector('.footer-note');
-        if (footer && !document.querySelector('.countdown-extra')) {
-            const examDate = new Date(2025, 5, 10); // 2025-06-10
-            const today = new Date();
-            const diffDays = Math.ceil((examDate - today) / (1000 * 60 * 60 * 24));
-            if (diffDays > 0) {
-                const countdownSpan = document.createElement('span');
-                countdownSpan.className = 'countdown-extra';
-                countdownSpan.innerHTML = `<i class="fa-regular fa-hourglass-half"></i> 距期末周还有 ${diffDays} 天，冲鸭！`;
-                footer.appendChild(countdownSpan);
-            } else {
-                const examSpan = document.createElement('span');
-                examSpan.innerHTML = `<i class="fa-regular fa-face-smile-wink"></i> 期末周进行时 · 祝你旗开得胜`;
-                footer.appendChild(examSpan);
-            }
-        }
-        // 额外的飞行彩蛋: 页面启动10秒后出现提示
-        setTimeout(() => {
-            const noti = document.createElement('div');
-            noti.style.position = 'fixed';
-            noti.style.bottom = '20px';
-            noti.style.right = '20px';
-            noti.style.background = '#1e293b';
-            noti.style.color = '#ffec99';
-            noti.style.padding = '10px 16px';
-            noti.style.borderRadius = '60px';
-            noti.style.fontSize = '0.8rem';
-            noti.style.zIndex = '1000';
-            noti.style.boxShadow = '0 8px 20px rgba(0,0,0,0.2)';
-            noti.style.backdropFilter = 'blur(8px)';
-            noti.innerHTML = '<i class="fa-regular fa-keyboard"></i> 试试点击 “戳我撒花” 和资料卡片 ✨';
-            document.body.appendChild(noti);
-            setTimeout(() => {
-                noti.style.opacity = '0';
-                setTimeout(() => noti.remove(), 800);
-            }, 4500);
-        }, 2000);
-    });
-    
-    // 控制台趣味输出
-    console.log("%c✨ C++ 程序设计 趣味飞书站已启动 ✨", "color: #f59e0b; font-size: 16px; font-weight: bold;");
-    console.log("%c📘 资料链接都模拟飞书云文档样式，点击可直接查看（根据实际替换URL） 祝编码愉快！", "color: #2b6e9e");
+    document.querySelectorAll('.card, .resource-link').forEach(el => el.addEventListener('click', (e) => { if(e.target.closest('.resource-link')||e.target.closest('.card')){ let rect=el.getBoundingClientRect(); createFloatingEmoji('✨', rect.left+rect.width/2, rect.top+10); } }));
+    const professorElement = document.getElementById('professorLink');
+    if(professorElement){ professorElement.addEventListener('click',(event)=>{ event.stopPropagation(); window.open('https://it.bjfu.edu.cn/szdw/szgk/fjs/03670040f02643ed861aa2f44b581432.html', '_blank'); let rect=professorElement.getBoundingClientRect(); createFloatingEmoji('🚀', rect.left+30, rect.top-5); createFloatingEmoji('📖', rect.right-20, rect.top+10); }); professorElement.style.cursor='pointer'; }
+
+    // 互动按钮逻辑
+    document.getElementById('greetBtn')?.addEventListener('click', () => { const msgDiv = document.getElementById('surpriseMessage'); msgDiv.style.display = 'flex'; msgDiv.innerHTML = '<i class="fa-regular fa-face-smile"></i> 老师好！祝你编码愉快～ 保持好奇！'; setTimeout(() => { msgDiv.style.display = 'none'; }, 3000); });
+    document.getElementById('randomTipBtn')?.addEventListener('click', () => { const tips = ["用 const 代替 #define", "优先使用 nullptr 而不是 NULL", "尽量用范围for循环", "RAII 是资源管理神器", "多用智能指针 shared_ptr/unique_ptr"]; const msgDiv = document.getElementById('surpriseMessage'); msgDiv.style.display = 'flex'; msgDiv.innerHTML = `<i class="fa-regular fa-lightbulb"></i> C++ 小贴士：${tips[Math.floor(Math.random()*tips.length)]}`; setTimeout(() => { msgDiv.style.display = 'none'; }, 3000); });
+    document.getElementById('randomChapterBtn')?.addEventListener('click', () => { const chaptersList = ["初识C++", "类与对象", "继承和多态", "运算符重载", "模板", "流", "异常与断言", "初识STL"]; const random = chaptersList[Math.floor(Math.random()*chaptersList.length)]; const resultDiv = document.getElementById('chapterResult'); resultDiv.style.display = 'flex'; resultDiv.innerHTML = `<i class="fa-solid fa-shuffle"></i> 随机章节：${random}，快去复习吧！`; setTimeout(() => { resultDiv.style.display = 'none'; }, 3000); });
+
+    window.addEventListener('load', () => { renderResources(); updateRandomNotice(); });
+    console.log("%c✨ 戳我撒花按钮已变大，课程简介增加了点击互动 ✨", "color: #f59e0b; font-size: 14px;");
 </script>
 </body>
 </html>
