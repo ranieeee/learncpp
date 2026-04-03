@@ -472,10 +472,10 @@
     <!-- 课程简介区域 - 增加点击互动 -->
     <div class="course-intro" id="courseIntroClick">
         <div class="intro-title">
-            <i class="fa-regular fa-file-lines"></i> 📖 课程简介 <i class="fa-regular fa-hand-pointer" style="font-size: 0.8rem; opacity: 0.7;"></i>
+            <i class="fa-regular fa-file-lines"></i> 📖 课程简介
         </div>
         <div class="intro-content">
-            待更新
+            本课程为<strong>专业选修课</strong>，系统讲解C++核心编程技术，涵盖类与对象、继承多态、模板、STL及异常处理等关键内容。<strong>适合希望提升编程能力的同学选修</strong>，课程将为后续学习数据结构、掌握其他面向对象程序设计语言打下坚实基础。
         </div>
     </div>
 
@@ -487,13 +487,13 @@
             <h3><i class="fas fa-star-of-life" style="font-size: 0.9rem; color:#f59e0b;"></i> 讲师 & 助教天团</h3>
             <div class="teacher-info professor-clickable" id="professorLink">
                 <div class="avatar">👨‍🏫</div>
-                <div><strong>卢昊 副教授</strong><br> 数字媒体教研室 | 编程语言</div>
+                <div><strong>卢昊 副教授</strong><br>数字媒体教研室<br>待补充<br>待补充</div>
             </div>
             <div class="teacher-info">
                 <div class="avatar">👩‍💻</div>
-                <div><strong>助教：田雨歆 </strong><br> 答疑时间: 周三 14:00-16:00 (线上+线下)</div>
+                <div><strong>助教：田雨歆</strong><br>待补充</div>
             </div>
-            <!-- 新增互动小按钮组 -->
+            <!-- 互动小按钮组 -->
             <div class="interact-buttons">
                 <button class="mini-btn" id="greetBtn"><i class="fa-regular fa-hand-peace"></i> 向老师问好</button>
                 <button class="mini-btn" id="randomTipBtn"><i class="fa-regular fa-lightbulb"></i> 随机C++ tip</button>
@@ -513,28 +513,29 @@
                 <li>📦 第5章：模板</li>
                 <li>🌊 第6章：流</li>
                 <li>🚨 第7章：异常与断言</li>
-                <li>🧩 第8章：初始STL</li>
+                <li>🧩 第8章：初识STL</li>
             </ul>
-            <!-- 互动按钮：随机章节挑战 -->
             <div class="interact-buttons">
                 <button class="mini-btn" id="randomChapterBtn"><i class="fa-solid fa-shuffle"></i> 随机抽章节</button>
             </div>
             <div id="chapterResult" class="surprise-box"></div>
         </div>
 
-        <!-- 评分/考试信息 - 更换了新图标 -->
+        <!-- 评分/考试信息 -->
         <div class="card">
             <div class="card-icon"><i class="fas fa-trophy"></i></div>
             <h3><i class="fa-regular fa-calendar-check"></i> 得分秘籍</h3>
-            <div class="detail-item"><i class="fa-regular fa-pen-to-square"></i> <strong>📝 平时成绩</strong> : 35%</div>
-            <div class="detail-item"><i class="fa-regular fa-keyboard"></i> <strong>🏆 期中机考</strong> : 15%</div>
-            <div class="detail-item"><i class="fa-regular fa-computer"></i> <strong>📚 期末机考</strong> : 50%</div>
-            <div class="detail-item" style="margin-top: 12px;"><i class="fa-regular fa-clock"></i> 期中测验：第8周 · 在线编程挑战</div>
-            <div class="detail-item"><i class="fa-regular fa-calendar"></i> 期末周：2026.06.10 - 06.18</div>
+            <div class="detail-item"><strong>📝 平时成绩</strong> : 35%</div> <div class="detail-item">
+                <strong>🏆 期中机考</strong> : 15%</div> <div class="detail-item">
+                <strong>📚 期末机考</strong> : 50%</div> <div class="detail-item">
+                <strong>👑 OJ说明：</strong> 叫“XX实验”的会计入总成绩；叫“XX课堂/练习”的不计入总成绩</div> <div class="detail-item">
+                <strong>💯 考试要求：</strong>开卷，允许携带纸质资料；独立完成，必须使用机房的电脑且不允许再安装任何软件和插件（不允许使用任何VS自带功能之外的代码智能补全功能），不允许提前在电脑存储代码文件，允许携带纸质资料，禁止所有电子资料（包括在网上查资料）。
+                考试会用软件实时监控屏幕，发现违纪或作弊记0分。
+                只能登录自己的账号，登录别人的账号或者被别人登录账号都算违纪。</div>
         </div>
     </div>
 
-    <!-- 资料库 / 发布资料链接 (飞书风格链接) -->
+    <!-- 资料库 / 发布资料链接 -->
     <div class="resources-section">
         <div class="section-title">
             <i class="fas fa-cloud-arrow-down"></i> 
@@ -544,7 +545,7 @@
         <div class="resources-grid" id="resourcesGrid"></div>
     </div>
     
-    <!-- 课程公告牌 额外飞书卡片风格 -->
+    <!-- 课程公告牌 -->
     <div style="margin: 0 2rem 1rem 2rem; background: #fef9e6; border-radius: 1.2rem; padding: 1rem 1.5rem; border-left: 5px solid #f97316;">
         <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
             <i class="fa-regular fa-bell" style="font-size: 1.5rem; color:#f97316;"></i>
@@ -560,12 +561,11 @@
 </div>
 
 <script>
-    // ---------- 资料库 ----------
-    // 第三个模块改为“签到”，点击跳转至指定飞书链接
+    // 资料库列表
     const resourcesList = [
         { icon: "📑", title: "课件PPT & 源码仓库", desc: "每章课件PDF + 示例代码，持续同步", url: "ppt.html", isNew: true, tag: "核心资料" },
-        { icon: "🌳", title: "北林OJ 在线刷题平台", desc: "C++程序设计专项练习 + 竞赛真题", url: "https://www.bjfuacm.com/contests", isNew: true, tag: "实战OJ" },
-        { icon: "✅", title: "签到打卡", desc: "每日学习签到，记录成长轨迹", url: "https://bjfu-lidar.feishu.cn/base/SbCObujGQaJsWQsnmd9cOiyPnvb?table=tblASsd52fSZlKJT&view=vewoiUIlNk", isNew: true, tag: "每日签到" },
+        { icon: "🌳", title: "北林OJ 在线刷题平台", desc: "C++程序设计课堂练习 + 实验", url: "https://www.bjfuacm.com/contests", isNew: true, tag: "实战OJ" },
+        { icon: "📚", title: "课程资料", desc: "飞书知识库 · 补充资料/拓展阅读/课堂秘辛", url: "https://bjfu-lidar.feishu.cn/wiki/Hw3TwFHOZiE5Gykrg40coQwznAe?from=from_copylink", isNew: true, tag: "知识库" },
         { icon: "🔮", title: "敬请期待", desc: "更多精彩内容准备中", url: "#", isNew: false, tag: "即将上线" },
         { icon: "✨", title: "敬请期待", desc: "敬请期待后续更新", url: "#", isNew: false, tag: "即将上线" },
         { icon: "🌟", title: "敬请期待", desc: "保持好奇心，很快见面", url: "#", isNew: false, tag: "即将上线" }
@@ -575,11 +575,10 @@
         const gridContainer = document.getElementById('resourcesGrid');
         if (!gridContainer) return;
         gridContainer.innerHTML = '';
-        resourcesList.forEach((res, index) => {
+        resourcesList.forEach((res) => {
             const linkDiv = document.createElement('a');
             linkDiv.className = 'resource-link';
             
-            // 处理敬请期待模块（不跳转，弹出提示）
             if (res.title === "敬请期待" || res.url === "#") {
                 linkDiv.href = "javascript:void(0);";
                 linkDiv.style.cursor = "default";
@@ -588,9 +587,7 @@
                     createFloatingEmoji('🔮', e.clientX, e.clientY);
                     alert("✨ 敬请期待，更多精彩内容正在准备中 ✨");
                 });
-            } 
-            // 签到模块和课件PPT模块正常跳转
-            else {
+            } else {
                 linkDiv.href = res.url;
                 linkDiv.target = '_blank';
                 linkDiv.rel = 'noopener noreferrer';
@@ -626,13 +623,11 @@
         setTimeout(() => el.remove(), 2800);
     }
 
-    // 随机趣闻
-    const funMessages = ["✨ 今日C++冷知识：vector<bool> 是个特例！", "🤖 推荐阅读：Effective Modern C++ 条款10～", "💡 善用 constexpr 提升性能 🚀", "🎉 恭喜同学在OJ挑战中完成Hard题目！", "📢 Bjarne Stroustrup 虚拟座谈🎙️", "🧩 指针 vs 引用: 记住指针可空", "🐞 Debug挑战: 找出未定义行为"];
+    const funMessages = ["✨ 今日C++冷知识：vector<bool> 是个特例！", "🤖 推荐阅读：Effective Modern C++ 条款10～", "💡 善用 constexpr 提升性能 🚀", "🔁 范围 for 循环里修改容器，小心迭代器失效。", "📦 nullptr 是类型安全的空指针，比 NULL 强多了。", "🧩 指针 vs 引用: 记住指针可空", "🐞 Debug挑战: 找出未定义行为"];
     const noticeSpan = document.getElementById('liveNotice');
     function updateRandomNotice() { if(noticeSpan) noticeSpan.innerHTML = `📢 ${funMessages[Math.floor(Math.random() * funMessages.length)]}`; }
     document.getElementById('refreshNoticeBtn')?.addEventListener('click', () => { updateRandomNotice(); const rect = document.getElementById('refreshNoticeBtn').getBoundingClientRect(); createFloatingEmoji('🎉', rect.left+20, rect.top-10); createFloatingEmoji('📘', rect.right-30, rect.top-5); });
     
-    // 戳我撒花按钮 - 增大尺寸后，撒花效果更丰富
     const triggerBtn = document.getElementById('triggerEmoji');
     if (triggerBtn) {
         triggerBtn.addEventListener('click', (e) => {
@@ -647,7 +642,6 @@
                 }, i * 35);
             }
             updateRandomNotice();
-            // 额外加个小惊喜
             setTimeout(() => {
                 createFloatingEmoji('🎊', x - 20, y - 30);
                 createFloatingEmoji('🎈', x + 30, y - 25);
@@ -655,13 +649,11 @@
         });
     }
     
-    // 课程简介点击互动
     const courseIntroDiv = document.getElementById('courseIntroClick');
     if (courseIntroDiv) {
         courseIntroDiv.addEventListener('click', (e) => {
             e.stopPropagation();
             const rect = courseIntroDiv.getBoundingClientRect();
-            // 飘浮多个小图标
             for (let i = 0; i < 6; i++) {
                 setTimeout(() => {
                     const randX = rect.left + 20 + Math.random() * (rect.width - 40);
@@ -670,20 +662,6 @@
                     createFloatingEmoji(icons[Math.floor(Math.random() * icons.length)], randX, randY);
                 }, i * 80);
             }
-            // 临时改变文字趣味反馈
-            const originalText = courseIntroDiv.querySelector('.intro-content')?.innerHTML;
-            const tempDiv = courseIntroDiv.querySelector('.intro-content');
-            if (tempDiv && originalText === "待更新") {
-                tempDiv.innerHTML = "🤗 哇！你发现隐藏彩蛋啦～ 课程简介正在精心准备中，敬请期待精彩内容！ ✨";
-                setTimeout(() => {
-                    tempDiv.innerHTML = "待更新";
-                }, 2500);
-            } else if (tempDiv) {
-                tempDiv.innerHTML = "🎉 课程内容持续升级中，感谢你的关注！ 🚀";
-                setTimeout(() => {
-                    tempDiv.innerHTML = originalText;
-                }, 2000);
-            }
         });
     }
     
@@ -691,13 +669,12 @@
     const professorElement = document.getElementById('professorLink');
     if(professorElement){ professorElement.addEventListener('click',(event)=>{ event.stopPropagation(); window.open('https://it.bjfu.edu.cn/szdw/szgk/fjs/03670040f02643ed861aa2f44b581432.html', '_blank'); let rect=professorElement.getBoundingClientRect(); createFloatingEmoji('🚀', rect.left+30, rect.top-5); createFloatingEmoji('📖', rect.right-20, rect.top+10); }); professorElement.style.cursor='pointer'; }
 
-    // 互动按钮逻辑
     document.getElementById('greetBtn')?.addEventListener('click', () => { const msgDiv = document.getElementById('surpriseMessage'); msgDiv.style.display = 'flex'; msgDiv.innerHTML = '<i class="fa-regular fa-face-smile"></i> 老师好！祝你编码愉快～ 保持好奇！'; setTimeout(() => { msgDiv.style.display = 'none'; }, 3000); });
     document.getElementById('randomTipBtn')?.addEventListener('click', () => { const tips = ["用 const 代替 #define", "优先使用 nullptr 而不是 NULL", "尽量用范围for循环", "RAII 是资源管理神器", "多用智能指针 shared_ptr/unique_ptr"]; const msgDiv = document.getElementById('surpriseMessage'); msgDiv.style.display = 'flex'; msgDiv.innerHTML = `<i class="fa-regular fa-lightbulb"></i> C++ 小贴士：${tips[Math.floor(Math.random()*tips.length)]}`; setTimeout(() => { msgDiv.style.display = 'none'; }, 3000); });
     document.getElementById('randomChapterBtn')?.addEventListener('click', () => { const chaptersList = ["初识C++", "类与对象", "继承和多态", "运算符重载", "模板", "流", "异常与断言", "初识STL"]; const random = chaptersList[Math.floor(Math.random()*chaptersList.length)]; const resultDiv = document.getElementById('chapterResult'); resultDiv.style.display = 'flex'; resultDiv.innerHTML = `<i class="fa-solid fa-shuffle"></i> 随机章节：${random}，快去复习吧！`; setTimeout(() => { resultDiv.style.display = 'none'; }, 3000); });
 
     window.addEventListener('load', () => { renderResources(); updateRandomNotice(); });
-    console.log("%c✨ 戳我撒花按钮已变大，课程简介增加了点击互动 ✨", "color: #f59e0b; font-size: 14px;");
+    console.log("%c✨ 已修复卡片布局问题，三个模块现在正常一排显示 ✨", "color: #f59e0b; font-size: 14px;");
 </script>
 </body>
 </html>
